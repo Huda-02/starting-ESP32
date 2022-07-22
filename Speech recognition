@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech To Text</title>
+    
+
+    
+    <style>
+       
+        body{
+        display: flex;
+        justify-content: center;
+        min-height: 120vh;
+        font-size: 20px;
+                }
+        .container {
+        text-align: center;
+        }
+        h1 {
+        font-size: 40px;
+        color: black;
+        }
+        textarea {
+        width: 100%;
+        height: 150px;
+        font-size: 25px;
+        background-color: rgb(251, 249, 249);
+        margin-bottom: 20px;
+        }
+        button,select{
+        padding: 10px 20px ;
+        background: rgb(63, 91, 143);
+        color: white;
+        }
+
+       
+    </style>
+    
+    
+    </head>
+    <body>
+        <div class="container">
+            <h1>ابدأ التحدث</h1> 
+            <textarea style="text-align: center;"; id="output" name="output" rows="10" cols="15" placeholder=" النص "></textarea>
+            
+            <button id="stop" name="stop">توقف</button>
+            <button id="start" name="start">سجل</button>
+            
+        </div>
+        
+    
+        
+        
+    <script>
+        
+        
+    var output = document.getElementById("output");
+    var start = document.getElementById("start");
+    var stop = document.getElementById("stop");
+    var speechRecognition = speechRecognition || webkitSpeechRecognition;
+    var recognizer = new speechRecognition();
+    recognizer.lang = 'ar';
+
+        
+        
+    start.onclick = function() {
+        recognizer.start();
+    }
+    stop.onclick = function() {
+        recognizer.stop();
+    }
+    recognizer.onspeechend = function() {
+        stop.click();
+    }
+    
+    
+    
+    recognizer.onresult = function(event) {
+        var Textbox = event.results[0][0].transcript;
+        output.value = Textbox;
+    }
+    
+    </script>
+  
+</body>
+</html>
